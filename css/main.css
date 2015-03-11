@@ -22,7 +22,7 @@ p, blockquote, q, pre, address, hr, code, samp, dl, ol, ul, form, table, fieldse
 /* TYPOGRAPHY */
 /* Composed to a scale of 12px, 14px, 16px, 18px, 21px, 24px, 36px, 48px, 60px and 72px */
 h1, h2, h3, h7, h4, h5, h6 {font-family:'Open Sans', sans-serif;color:#444;}
-h1 {margin: 0; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; text-align: center; margin-bottom: 0.6667em} /* 36px / 48px centered */
+h1 {margin: 20%; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; text-align: center; margin-bottom: 0.6667em} /* 36px / 48px centered */
 h2 {margin: 0; font-size: 3em; line-height: 1em; margin-bottom: 0.5em} /* 48px / 48px */
 h3 {margin: 0; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; margin-bottom: 0.6667em} /* 36px / 48px */ 
 h4 {margin: 0; font-size: 1.5em; line-height: 1em; margin-bottom: 1em} /* 24px / 24px */
@@ -112,8 +112,7 @@ span.amp{font-family:Adobe Caslon Pro,Baskerville,"Goudy Old Style","Palatino","
 /* DEFAULT MOBILE STYLE */
 body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
-.g1,.g2,.g3{display:block; position: relative; margin-left: 1%; margin-right: 1%}
-.g4{display:block; position: relative; margin-left: 20%; margin-right: 20%}
+.g1,.g2,.g3,.g4{display:block; position: relative; margin-left: 1%; margin-right: 1%}
 /* 1 column grid */
 .g1,.g2,.g3,.g4{width:98.0%}
 
@@ -333,12 +332,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
  margin-top: 6px;
 }
 .item-box .item-data h3{
-  line-height: 1em;
-  margin: 3px 0px 0px 0px;
-  font-size: 1em;
-
-}
-.item-box .item-data h7{
   line-height: 1em;
   margin: 3px 0px 0px 0px;
   font-size: 1em;
