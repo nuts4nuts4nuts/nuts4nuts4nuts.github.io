@@ -223,18 +223,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
   text-decoration: none;
 }
 
-.tab b {
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 14px;
-  display: block;
-  visibility: hidden;
-  padding: 2px 10px;
-  outline: none;
-  color: #888;
-  text-decoration: none;
-}
-
 .tab a:hover {
   text-decoration: none;
 }
@@ -252,6 +240,30 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
   color: #e74c3c;
 }
 .tab a i{
+  font-size: 16px;
+  margin-right: 0px;
+}
+
+.tab b {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: block;
+  padding: 2px 10px;
+  outline: none;
+  color: #888;
+  text-decoration: none;
+}
+
+.tab b:hover {
+  text-decoration: none;
+}
+
+.tab b.active {
+  padding-top: 10px;
+  color: #e74c3c;
+}
+.tab b i{
   font-size: 16px;
   margin-right: 0px;
 }
