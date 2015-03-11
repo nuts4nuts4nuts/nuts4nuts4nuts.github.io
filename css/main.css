@@ -223,6 +223,17 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
   text-decoration: none;
 }
 
+.tab b {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: none;
+  padding: 2px 10px;
+  outline: none;
+  color: #888;
+  text-decoration: none;
+}
+
 .tab a:hover {
   text-decoration: none;
 }
