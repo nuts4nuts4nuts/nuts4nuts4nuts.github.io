@@ -30,7 +30,7 @@ h5 {margin: 0; font-size: 1.3125em; line-height: 1.14285714285714285714285714285
 h6 {margin: 0; font-size: 1.125em; line-height: 1.3333333333333333333333333333333em; margin-bottom: 1.3333333333333333333333333333333em} /* 18px / 24px */
 p, ul, blockquote, td, th, label {margin: 0; font-size: 1em; line-height: 1.5em; margin-bottom: 1.5em} /* 16px / 24px */
 small, p.small {margin: 0; font-size: 0.875em; line-height: 1.7142857142857142857142857142857em; margin-bottom: 1.7142857142857142857142857142857em} /* 14px / 24px */
-pre {margin-left: 10%; margin-right: 10%; font-size: 1em; line-height: 1.5em; text-indent: 0; text-align: justify; margin-bottom: 1.5em} /* 16px / 24px centered*/
+p.justify {margin-left: 10%; margin-right: 10%; font-size: 1em; line-height: 1.5em; text-align: justify; margin-bottom: 1.5em} /* 16px / 24px centered*/
 
 /* CODE */
 pre {word-wrap: break-word} /* Allow line wrapping of 'pre' */
