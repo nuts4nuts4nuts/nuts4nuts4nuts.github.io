@@ -112,10 +112,10 @@ span.amp{font-family:Adobe Caslon Pro,Baskerville,"Goudy Old Style","Palatino","
 /* DEFAULT MOBILE STYLE */
 body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
-.g1,.g2,.g3,.g4{display:block; position: relative; margin-left: 1%; margin-right: 1%}
+.g1,.g2,.g3{display:block; position: relative; margin-left: 1%; margin-right: 1%}
+.g4{display:block; position: relative; margin-left: 20%; margin-right: 20%}
 /* 1 column grid */
-.g1,.g2,.g3{width:98.0%}
-.g4{width:50.0%}
+.g1,.g2,.g3,.g4{width:98.0%}
 
 /* Wrapper */
 .main{
@@ -689,7 +689,7 @@ Change widths as necessary
  .g1 {width:48.0%}
  .g2 {width:48.0%}
  .g3 {width:98.0%}
- .g4 {width:50%;}
+ .g4 {width:98.0%;}
 }
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP */
@@ -714,7 +714,7 @@ Change widths as necessary
   .g1 {width:31.333%}
   .g2 {width:64.667%;}
   .g3 {width:98.0%}
-  .g4 {width:50%;}
+  .g4 {width:98.0%;}
 }
 
 @media only screen and (min-width: 1280px) { 
@@ -743,6 +743,6 @@ Change widths as necessary
   tr, img {page-break-inside: avoid; }
   img {max-width: 100% !important; }
   @page {margin: 0.5cm}
-  p, h2, h3, h7 {orphans: 3; widows: 3}
-  h2, h3, h7{page-break-after: avoid}
+  p, h2, h3 {orphans: 3; widows: 3}
+  h2, h3 {page-break-after: avoid}
 }
