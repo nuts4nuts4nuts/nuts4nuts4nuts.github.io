@@ -27,7 +27,7 @@ h2 {margin: 0; font-size: 3em; line-height: 1em; margin-bottom: 0.5em} /* 48px /
 h3 {margin: 0; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; margin-bottom: 0.6667em} /* 36px / 48px */ 
 h4 {margin: 0; font-size: 1.5em; line-height: 1em; margin-bottom: 1em} /* 24px / 24px */
 h5 {margin: 0; font-size: 1.3125em; line-height: 1.1428571428571428571428571428571em; margin-bottom: 1.1428571428571428571428571428571em} /* 21px / 24px */
-h6 {margin: 0; font-size: 1.135em; line-height: 1em; text-align: center; margin-bottom: 0.10em} /* small centered */
+h6 {margin: 0; font-size: 1.30em; line-height: 1em; text-align: center; margin-bottom: 0.10em} /* small centered */
 p, ul, blockquote, td, th, label {margin: 0; font-size: 1em; line-height: 1.5em; margin-bottom: 1.5em} /* 16px / 24px */
 small, p.small {margin: 0; font-size: 0.875em; line-height: 1.7142857142857142857142857142857em; margin-bottom: 1.7142857142857142857142857142857em} /* 14px / 24px */
 pre {margin-left: 10%; margin-right: 10%; font-size: 1em; font: 100% 'Lato', sans-serif; line-height: 1.5em; text-align: justify; margin-bottom: 1.5em} /* 16px / 24px centered*/
