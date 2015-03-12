@@ -113,7 +113,7 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
 .g1,.g2,.g3,.g4{display:block; position: relative; margin-left: 1%; margin-right: 1%}
 .g5{display:block; position: relative; margin: 2%}
-.g6{display:block; position: relative; margin-left: 5%; margin-right: 5%}
+.g6{display:block; position: relative; margin-left: 10%; margin-right: 10%}
 /* 1 column grid */
 .g1,.g2,.g3,.g4,.g5,.g6{width:98.0%}
 
