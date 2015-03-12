@@ -685,7 +685,7 @@ Change widths as necessary
  .g3 {width:98.0%}
  .g4 {width:98.0%;}
  .g5 {width:46.0%}
- .g6 {width:98.0%}
+ .g6 {width:80.0%}
 }
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP */
@@ -712,7 +712,7 @@ Change widths as necessary
   .g3 {width:98.0%}
   .g4 {width:98.0%;}
   .g5 {width:46.0%}
-  .g6 {width:98.0%}
+  .g6 {width:80.0%}
 }
 
 @media only screen and (min-width: 1280px) { 
