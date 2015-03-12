@@ -113,8 +113,9 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
 .g1,.g2,.g3,.g4{display:block; position: relative; margin-left: 1%; margin-right: 1%}
 .g5{display:block; position: relative; margin: 2%}
+.g6{display:block; position: relative; margin-left: 5%; margin-right: 5%}
 /* 1 column grid */
-.g1,.g2,.g3,.g4,.g5{width:98.0%}
+.g1,.g2,.g3,.g4,.g5,.g6{width:98.0%}
 
 /* Wrapper */
 .main{
@@ -675,7 +676,7 @@ Change widths as necessary
    border-left: 1px solid #f1f1f1;
  }
  /* COLUMN GRID */
- .g1,.g2,.g3,.g5 {display:inline; float: left}
+ .g1,.g2,.g3,.g5,.g6 {display:inline; float: left}
  .g4 {display:inline; float: center}
 
  /* 2 COLUMN GRID */
@@ -684,6 +685,7 @@ Change widths as necessary
  .g3 {width:98.0%}
  .g4 {width:98.0%;}
  .g5 {width:46.0%}
+ .g6 {width:98.0%}
 }
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP */
@@ -710,6 +712,7 @@ Change widths as necessary
   .g3 {width:98.0%}
   .g4 {width:98.0%;}
   .g5 {width:46.0%}
+  .g6 {width:98.0%}
 }
 
 @media only screen and (min-width: 1280px) { 
