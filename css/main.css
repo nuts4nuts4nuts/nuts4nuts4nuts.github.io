@@ -676,7 +676,7 @@ Change widths as necessary
  /* COLUMN GRID */
  .g1,.g2,.g3 {display:inline; float: left}
  .g4 {display:inline; float: center}
- .g5 {display:inline; float: center}
+ .g5 {display:inline; float: left}
 
  /* 2 COLUMN GRID */
  .g1 {width:48.0%}
