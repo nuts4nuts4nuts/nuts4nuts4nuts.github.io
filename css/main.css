@@ -112,7 +112,7 @@ span.amp{font-family:Adobe Caslon Pro,Baskerville,"Goudy Old Style","Palatino","
 body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
 .g1,.g2,.g3,.g4{display:block; position: relative; margin-left: 1%; margin-right: 1%}
-.g5{display:block; position: relative; margin-left: 5%; margin-right: 5%}
+.g5{display:block; position: relative; margin: 5%}
 /* 1 column grid */
 .g1,.g2,.g3,.g4,.g5{width:98.0%}
 
@@ -709,7 +709,7 @@ Change widths as necessary
   .g2 {width:64.667%;}
   .g3 {width:98.0%}
   .g4 {width:98.0%;}
-  .g5 {width:40%}
+  .g5 {width:35%}
 }
 
 @media only screen and (min-width: 1280px) { 
