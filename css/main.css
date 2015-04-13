@@ -303,10 +303,12 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 .contact-info{
 	width: 50%;
 	float: left;
+	background-color: purple;
 }
 .contact-info-right{
 	width: 50%;
 	float: right;
+	background-color: blue;
 }
 .contact-info i{
 
