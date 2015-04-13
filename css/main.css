@@ -303,17 +303,26 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 .contact-info{
 
 }
+.contact-info-right{
+	float: right;
+}
 .contact-info i{
+
+}
+.contact-info-right i{
 
 }
 
 /* Icon Styling */
 .contact-info i{
-
   color: #333;
   font-size: 46px;
-
 }
+.contact-info-right i{
+  color: #333;
+  font-size: 46px;
+}
+
 /* Item Box */
 
 .item-box{
