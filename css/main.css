@@ -740,8 +740,8 @@ Change widths as necessary
   padding-top: 20px;
 }
   /* 3 COLUMN GRID */
-  .g1 {width:31.333%}
-  .g2 {width:64.667%;}
+  .g1 {width:30%}
+  .g2 {width:63%;}
   .g3 {width:98.0%}
   .g4 {width:98.0%;}
   .g5 {width:40%;}
