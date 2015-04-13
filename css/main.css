@@ -326,6 +326,7 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
   float: right;
   margin-right: 2%;
   margin-left: 2%;
+  width: 10%;
 }
 
 /* Item Box */
