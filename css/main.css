@@ -389,8 +389,8 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 .image-small img{
   margin: 0px;
-  max-width: 95%;
-  max-height: 95%;
+  max-width: 96%;
+  max-height: 96%;
   overflow: hidden;
   background-size: cover;
 }
