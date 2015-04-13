@@ -326,7 +326,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
   float: right;
   margin-right: 2%;
   margin-left: 2%;
-  width: 10%;
 }
 
 /* Item Box */
@@ -379,9 +378,16 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 .image{
   position: relative;
 }
+.image-small{
+  position: relative;
+}
 .image img{
   margin: 0px;
   width: 100%;
+}
+.image-small img{
+  margin: 0px;
+  width: 10%;
 }
 .image-overlay {
   position: absolute;
@@ -702,7 +708,7 @@ Change widths as necessary
  .g4{width:98.0%}
  .g5{width:40%}
  .g6{width:80.0%}
- .g7{width:10%}
+ .g7{width:48%}
  .g8{width:40%}
 }
 
@@ -731,7 +737,7 @@ Change widths as necessary
   .g4 {width:98.0%;}
   .g5 {width:40%;}
   .g6 {width:80.0%;}
-  .g7 {width:10%;}
+  .g7 {width:20%;}
   .g8 {width:40%;}
 }
 
