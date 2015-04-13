@@ -112,10 +112,11 @@ span.amp{font-family:Adobe Caslon Pro,Baskerville,"Goudy Old Style","Palatino","
 body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* column grid */
 .g1,.g2,.g3,.g4,.g7{display:block; position: relative; margin-left: 1%; margin-right: 1%}
-.g5{display:block; position: relative; margin-left: 7.5%; margin-top: 1%; margin-bottom: 1%}
+.g5{display:block; position: relative; margin-left: 5%; margin-top: 1%; margin-bottom: 1%}
+.g8{display:block; position: relative; margin-right: 5%; margin-top: 1%; margin-bottom: 1%}
 .g6{display:block; position: relative; margin-left: 10%; margin-right: 10%}
 /* 1 column grid */
-.g1,.g2,.g3,.g4,.g5,.g6,.g7{width:98.0%}
+.g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{width:98.0%}
 
 /* Wrapper */
 .main{
@@ -676,17 +677,18 @@ Change widths as necessary
    border-left: 1px solid #f1f1f1;
  }
  /* COLUMN GRID */
- .g1,.g2,.g3,.g5,.g6 {display:inline; float: left}
+ .g1,.g2,.g3,.g5,.g6,.g8 {display:inline; float: left}
  .g4,.g7 {display:inline; float: center}
 
  /* 2 COLUMN GRID */
- .g1 {width:48.0%}
- .g2 {width:48.0%}
- .g3 {width:98.0%}
- .g4 {width:98.0%;}
- .g5 {width:40%}
- .g6 {width:80.0%}
+ .g1{width:48.0%}
+ .g2{width:48.0%}
+ .g3{width:98.0%}
+ .g4{width:98.0%}
+ .g5{width:40%}
+ .g6{width:80.0%}
  .g7{width:48%}
+ .g8{width:40%}
 }
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP */
@@ -715,6 +717,7 @@ Change widths as necessary
   .g5 {width:40%;}
   .g6 {width:80.0%;}
   .g7 {width:20%;}
+  .g8 {width:40%;}
 }
 
 @media only screen and (min-width: 1280px) { 
