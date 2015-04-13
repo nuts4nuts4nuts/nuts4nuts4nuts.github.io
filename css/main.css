@@ -387,7 +387,10 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 .image-small img{
   margin: 0px;
-  width: 10%;
+  max-width: 20%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
 }
 .image-overlay {
   position: absolute;
