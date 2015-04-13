@@ -380,7 +380,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 .image-small{
   position: relative;
-  float: right;
   width: 45px;
   height: 45px;
   margin-right: 2%;
