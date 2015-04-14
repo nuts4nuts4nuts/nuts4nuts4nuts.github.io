@@ -21,12 +21,12 @@ p, blockquote, q, pre, address, hr, code, samp, dl, ol, ul, form, table, fieldse
 
 /* TYPOGRAPHY */
 /* Composed to a scale of 12px, 14px, 16px, 18px, 21px, 24px, 36px, 48px, 60px and 72px */
-h1, h2, h3, h7, h4, h5, h6 {font-family:'Open Sans', sans-serif;color:#444;}
+h1, h2, h3, h7, h4, h5, h5c, h6 {font-family:'Open Sans', sans-serif;color:#444;}
 h1 {margin: 0; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; text-align: center; margin-bottom: 0.6667em} /* 36px / 48px centered */
 h2 {margin: 0; font-size: 3em; line-height: 1em; margin-bottom: 0.5em} /* 48px / 48px */
 h3 {margin: 0; font-size: 2.25em; line-height: 1.3333333333333333333333333333333em; margin-bottom: 0.6667em} /* 36px / 48px */ 
 h4 {margin: 0; font-size: 1.5em; line-height: 1em; margin-bottom: 1em} /* 24px / 24px */
-h5 {margin: 0; font-size: 1.3125em; line-height: 1.1428571428571428571428571428571em; margin-bottom: 1.1428571428571428571428571428571em} /* 21px / 24px */
+h5, h5c {margin: 0; font-size: 1.3125em; line-height: 1.1428571428571428571428571428571em; margin-bottom: 1.1428571428571428571428571428571em} /* 21px / 24px */
 h6 {margin: 0; font-size: 1.30em; line-height: 1em; text-align: center; margin-bottom: 0.10em} /* small centered */
 p, ul, blockquote, td, th, label {margin: 0; font-size: 1em; line-height: 1.5em; margin-bottom: 1.5em} /* 16px / 24px */
 small, p.small {margin: 0; font-size: 0.875em; line-height: 1.7142857142857142857142857142857em; margin-bottom: 1.7142857142857142857142857142857em} /* 14px / 24px */
@@ -117,6 +117,11 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 .g6{display:block; position: relative; margin-left: 10%; margin-right: 10%}
 /* 1 column grid */
 .g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{width:98.0%}
+
+/* For references */
+.g2 a{
+	float: center;
+}
 
 /* Wrapper */
 .main{
