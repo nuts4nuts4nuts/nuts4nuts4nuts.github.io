@@ -280,6 +280,7 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 .info h4, #header h4{
   color: #999;
+  border-bottom: 1px solid #F1F1F1;
 }
 /* Contact */
 .main-links{
