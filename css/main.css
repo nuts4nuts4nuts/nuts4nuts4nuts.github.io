@@ -118,11 +118,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* 1 column grid */
 .g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{width:98.0%}
 
-/* For references */
-.g2 a{
-	float: center;
-}
-
 /* Wrapper */
 .main{
   padding-top: 50px;
@@ -131,7 +126,6 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 .wrapper{
   margin: 0 auto;
 }
-
 
 /* Utility */
 .chromeframe {
