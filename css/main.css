@@ -271,6 +271,7 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
  width: 100%;
 }
 .info{
+	margin-bottom: .3em;
 	border-bottom: 1px solid #F1F1F1;
 }
 .info h2, #header h2{
