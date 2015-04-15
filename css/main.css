@@ -301,11 +301,11 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 } 
 /* Contact-info */
 .contact-info{
-	width: 40%;
+	width: 45%;
 	float: left;
 }
 .contact-info-right{
-	width: 60%;
+	width: 55%;
 	float: right;
 }
 .contact-info i{
