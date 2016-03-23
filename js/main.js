@@ -7,15 +7,15 @@ $(document).ready( function() {
         	$logo.show();
         }
     }
-    
-	// Show logo 
+
+	// Show logo
 	$('#tab-container .tab a').click(function() {
-	  $logo.slideDown('slow');
+	  $logo.slideDown('fast');
 	});
 	// Hide logo
 	$('#tab-about').click(function() {
-	  $logo.slideUp('slow');
-	});	
+	  $logo.slideUp('fast');
+	});
 function animMeter(){
     $(".meter > span").each(function() {
                 $(this)
@@ -33,7 +33,7 @@ animMeter();
         updateHash		: true,
         transitionIn	: 'slideDown',
         transitionOut	: 'slideUp',
-        animationSpeed	: 600,
+        animationSpeed	: 400,
         tabActiveClass	: 'active'}).bind('easytabs:midTransition', function(event, $clicked, $targetPanel){
             if($targetPanel.selector=='#resume'){
                     animMeter();
