@@ -485,17 +485,32 @@ Vicious Orb is meant to be a very visceral game. It is a competitive action game
 				Business Card Game
                             </h1>
 			    <p>
-In anticipation of GDC 2016, I was scrambling around for a business card idea. This would be my first personal business card, so I wanted to make it special. I wanted my business card to reflect my personality; my love of math, games, and little programs. I wanted the cards to have some kind of function or game, so that people recieving them might have more of a reason to not immediately discard them. I came across <a href="https://moo.com">Moo's</a> offer of up to fifty different business card backs for no extra charge, and knew that I needed to make some sort of randomly generated game.
+In anticipation of GDC 2016, I was scrambling around for a business card idea. This would be my first personal business card, so I wanted to make it special. I wanted my business card to reflect my personality; my love of math, games, and little programs. I wanted the cards to have some kind of function or game, so that people recieving them would have a reason to not immediately discard them. I came across <a href="https://moo.com">Moo's</a> offer of up to fifty different card backs for no extra charge, and knew that I needed to make some sort of randomly generated game.
 </p><h6>
 Graph Theory
 </h6><div class="break"></div><p>
-I got to thinking about the possible games one could fit on a business card, and decided an abstract puzzle sort of thing would be best given the strict restraints of the platform. A few facts from graph theory popped into my mind and, bam, there was a randomly generatable puzzle game. The types of graphs my program can generate are euler circuits, euler paths, and hamiltonian circuits, and the methods for generating those graphs are fairly simple. It all comes down to the number of connections between nodes, here's how it works: <br>
+I got to thinking about the possible games one could fit on a business card, and decided an abstract puzzle sort of thing would be best given the strict restraints of the platform. A few facts from graph theory popped into my mind and, bam, I had my randomly generatable puzzle game. The idea is that I would randomly generate graphs with Euler circuits, Euler paths, and Hamiltonian circuits, give each graph a unique id number, and provide little instructions for how the graph can be traversed. The methods for generating these graphs are fairly simple, it all comes down to the number of connections between nodes, here's how it works: <br>
 <ul>
     <li>
-        <p>something</p>
+        <p>If no nodes have an odd number of connections, the graph contains an Euler circuit.</p>
+    </li>
     <li>
+        <p>If exactly two nodes have an odd number of connections, the graph contains an Euler path.</p>
+    </li>
+    <li>
+        <p>If we take the <a href="https://en.wikipedia.org/wiki/Line_graph">line graph</a> of a graph with an Euler circuit, it will contain a Hamiltonian circuit.</p>
+    </li>
+    <li>
+        <p>Note: If more than two nodes have an odd number of connections, the graph has none of these properties! (Also, it is impossible for only one node to have an odd number of connections.)</p>
+    </li>
 </ul>
+For my program, we always generate an Euler circuit graph then, depending on the type of graph we desire, we either leave it alone, prune (or add) an edge (to get an Euler path), or take its line graph (to get a Hamiltonian circuit). From there we place nodes randomly, attempting to give them as much space as possible within the business card dimensions, then we draw edges between the nodes. Finally, we simply take a screen shot of the generated graph, instruction text, and id number, and export it to a png for use as a potential card back.
 			    </p>
+                        <div class="g6">
+                            <div class="image">
+                                <img src="http://i.imgur.com/9ASGcxk.jpg" alt="">
+                            </div>
+                        </div>
                         </div>
                     </section>
                 </div>
@@ -518,7 +533,6 @@ Currently filling this out!
 Currently filling this out!
 </h6><div class="break"></div><p>
 Currently filling this out!
-<li>
 			    </p>
                         </div>
                     </section>
