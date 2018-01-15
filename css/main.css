@@ -362,7 +362,7 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 /* WorkExperience */
 .work li{
   border-bottom: 1px solid #f1f1f1;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 .work li span{
   float: right;
@@ -372,6 +372,19 @@ body {width: 92%; margin: 0 auto} /* Center page without wrapper */
 }
 .work li p{
   clear: both;
+}
+.work li pre{
+  float: left;
+}
+.reset{
+  margin-top: -1.5em;
+}
+.reset li{
+  list-style-type: disc;
+  border-bottom: 0;
+  margin-bottom: 0.1em;
+  margin-top: 0;
+  margin-left: -1.25em;
 }
 
 /* Portfolio */
