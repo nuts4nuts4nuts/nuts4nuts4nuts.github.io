@@ -31,7 +31,6 @@ $(document).ready( function() {
     });
   }
   animMeter();
-  window.addEventListener('resize', animMeter);
 
   $('#tab-container').easytabs({
     animate			: true,
