@@ -737,21 +737,21 @@ Change widths as necessary
 }
 
 /* TABLET/NETBOOK */
-@media only screen and (min-width: 768px) {
+/*@media only screen and (min-width: 768px) {
   body {
 
   }
 
-  /* Sidebar */
+  /* Sidebar
   .sidebar{
    padding-left: 20px;
    border-left: 1px solid #f1f1f1;
  }
- /* COLUMN GRID */
+ /* COLUMN GRID
  .g1,.g2,.g3,.g5,.g6,.g8 {display:inline; float: left}
  .g4,.g7 {display:inline; float: center}
 
- /* 2 COLUMN GRID */
+ /* 2 COLUMN GRID
  .g1{width:48.0%}
  .g2{width:48.0%}
  .g3{width:98.0%}
@@ -760,13 +760,24 @@ Change widths as necessary
  .g6{width:80.0%}
  .g7{width:48%}
  .g8{width:40%}
-}
+} */
 
 /* LANDSCAPE TABLET/NETBOOK/LAPTOP */
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 800px) {
   body {
 
   }
+
+  /* Sidebar */
+  .sidebar{
+    padding-left: 20px;
+    border-left: 1px solid #f1f1f1;
+  }
+
+  /* COLUMN GRID */
+  .g1,.g2,.g3,.g5,.g6,.g8 {display:inline; float: left}
+  .g4,.g7 {display:inline; float: center}
+
   .etabs >li span{
     display: inline;
   }
