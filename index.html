@@ -734,12 +734,37 @@
                   Description
                 </h6><div class="break"></div>
                 <p>
-                In the summer of 2017 I read the fascinating story of Claude Shanon and Edward Thorpe making the first wearable computer to predict roulette spins. The user would press a small button each time the roulette ball passed a certain point on the inner wheel of the roulette wheel and, given the time differences between the button presses, the comouter would calculate the speed of the ball relative to the inner wheel. From there, the computer would make a guess as to which pocket the ball will land in. 
+                In the summer of 2017 I read the <a href="https://www.cs.virginia.edu/~evans/thorp.pdf">fascinating story of Claude Shannon and Edward Thorp making the first wearable computer, designed to predict roulette spins.</a> The user would press a discreet button each time the roulette ball passed a certain point on the inner wheel of the roulette wheel and, given the time differences between the button presses, the computer would calculate the speed of the ball relative to the inner wheel. From there the computer would predict the final resting pocket of the ball. A signal indicating the pocket would be sent to the user and they would bet on that pocket and the other pockets nearby. The predictions were not perfectly accurate of course, but they were easily accurate enough to give the user an edge over the house.
+                </p>
+                <p>
+                I was really enjoying working with OpenCV at the time, and I thought roulette would be another interesting thing to do with the library. Shannon and Thorp's method relied on a user sending the computer timing information by pressing a button. There are myriad ways that a user could accidentally mistime their button press. I thought, what if I used OpenCV to track the motion of the ball and inner wheel in video of a roulette wheel, and gathered timing data that way? Of course, one can't just go to a casino with a laptop and a webcam and post up at the roulette table to gather data. Fortunately, with the proliferation of online live dealer casinos, I could easily gather data from real roulette wheels online. This added another dimension to the project, as my program would have to deal with the stream that an online casino provided me, but I took that as a fun challenge. <a href="">My program can be found on Github here.</a>
                 </p>
                 <h6>
-                  Subsection
+                  Counterplay
                 </h6><div class="break"></div>
                 <p>
+                Ultimately, I decided to stop working on the project before what I would call the finish. I needed to focus on other things, and I felt that I got a lot out of the work I had done. One interesting piece of data I got to gather relates to a form of counterplay that casinos have at their disposal against someone using this kind of program. In researching and developing the program, I found that there are three main requirements for gathering good data from the roulette table:
+                </p>
+                <ul>
+                  <li>
+                    The stream must be smooth and of decent quality.
+                  </li>
+                  <li>
+                    There must be a good and consistent view of the roulette wheel.
+                  </li>
+                  <li>
+                    There must be ample time between the ball being launched into the wheel and bets closing.
+                  </li>
+                </ul>
+                <p>
+                All of the online casinos that I looked at provided a smooth and high quality stream. After all, regular users would be turned off by a bad stream. The other two requirements were a bit harder to find, and nearly impossible to find together. Generally casinos offer two genres of live dealer roulette games: Standard Roulette and Immersive Roulette. Standard Roulette tables offer a good and relatively consistent view of the wheel, but the ball hardly makes two orbits around before betting closes. In Immersive Roulette the ball is allowed a few more orbits, but the streamed view is constantly rotating between different angles of the table and the dealer's face. I crossed both of these off as options. I found one game which seemed to have all three qualities in spades: a great stream, an unchanging overhead view of the wheel, and even more time before bets closing than Immersive Roulette. The only issue is that it was auto-roulette.
+                </p>
+                <p>
+                Auto-roulette wheels don't require a dealer to spin the inner wheel and launch the ball. Instead, the inner wheel is controlled by a mechanical rotor and the ball is launched with a puff of air. In research I found that <a href="http://www.cammegh.com/product.php?product=slingshot2">this kind of auto-roulette wheel has what they call Active Rotor Control.</a> A feature which makes the inner wheel slow down or speed up subtly after betting closes. This is subtle enough that a human player wouldn't notice and suspect foul play, but any predictions made by a computer based on the inner wheel speed before betting closes would be rendered useless. I wanted to see if my program could observe this changing rotor speed and here are the results:
+                </p>
+                ////////////////GRAPHS
+                <p>
+                Between changing rotor speed, rotating camera angles, and limited betting windows, online casinos have many ways to defend against a player with a roulette prediction program. Still, the program was fun to write and I learned a lot.
                 </p>
               </div>
               <div class="g1">
@@ -756,7 +781,7 @@
                       Built using OpenCV in C++.
                     </li>
                     <li>
-                      Use Physics knowledge to predict the final resting place of the ball given tracking information.
+                      Used physics knowledge to predict the final resting place of the ball given tracking information.
                     </li>
                     <li>
                       Developed a simple, but powerful, UI inspired by Licecap.
