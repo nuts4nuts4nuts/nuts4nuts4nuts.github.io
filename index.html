@@ -734,12 +734,10 @@
                   Description
                 </h6><div class="break"></div>
                 <p>
-                </p><h6>
+                In the summer of 2017 I read the fascinating story of Claude Shanon and Edward Thorpe making the first wearable computer to predict roulette spins. The user would press a small button each time the roulette ball passed a certain point on the inner wheel of the roulette wheel and, given the time differences between the button presses, the comouter would calculate the speed of the ball relative to the inner wheel. From there, the computer would make a guess as to which pocket the ball will land in. 
+                </p>
+                <h6>
                   Subsection
-                </h6><div class="break"></div>
-                <p>
-                </p><h6>
-                  Subsection 2
                 </h6><div class="break"></div>
                 <p>
                 </p>
@@ -788,14 +786,14 @@
                 </h6><div class="break"></div>
                 <p>
                 In 2016, inspired by the work in painting with genetic algorithms by <a href="https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/">many</a> <a href="http://alteredqualia.com/visualization/evolve/">other</a> <a href="https://chriscummins.cc/s/genetics/">programmers</a>, I set about creating a hardware accelerated version of the idea. Unfortunately, I didn't fully understand what made the other programs genetic algorithms at the time, but I tried to recreate the idea simply by trying to reproduce the results. I developed the prototype of my version on Shadertoy. <a href="https://www.shadertoy.com/view/XsGXWW">That prototype can be found here.</a>
+                </p>
+                <p>
+                There were a few limitations that I ran into in the prototype version. The biggest one is that Shadertoy limits shaders to sixty FPS, and I wanted Make a Face to run faster. Besides that I wanted to create a better way to change the settings of the program (in the Shadertoy version they are defines you can comment and uncomment) and I wanted to try to more closely recreate the effect shown in the cpu genetic painting programs. In the summer of 2017 I worked on <a href="https://github.com/nuts4nuts4nuts/MakeAFace">the standalone version, which can be found on GitHub.</a>
                 </p><h6>
-                  Subsection
+                  Dear ImGui
                 </h6><div class="break"></div>
                 <p>
-                </p><h6>
-                  Subsection 2
-                </h6><div class="break"></div>
-                <p>
+                For the GUI of the standalone version I used Dear ImGui, an immediate mode GUI library for C++. I saw a demonstration of Dear ImGui at GDC 2016 and was really impressed. I had been looking for an excuse to try it out, so when it came time to write the controls for Make a Face I thought it would be a great use case. My main goal for Make a Face was to be able to experiment and iterate as much as possible, so I focused on making the UI code simple and flexible. The program would be mainly used by me, and is not commercial so aesthetics were not very important. Here is a little example of the UI in action:
                 </p>
               </div>
               <div class="g1">
