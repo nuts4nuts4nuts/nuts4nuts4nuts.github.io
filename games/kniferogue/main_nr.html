@@ -1,0 +1,186 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Shape Rogue - The Game of the Century</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'matter',
+        matter: {
+            gravity: { y: 0.5 },
+            debug: true
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var player;
+var stars;
+var platforms;
+
+//These are done as separate numbers to get around JS passing conventions. TODO: Figure this out better
+var pressX;
+var pressY;
+
+//TODO: Figure out how to get pointerout event for whole canvas working
+
+var score = 0;
+var gameOver = false;
+var scoreText;
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('square', 'assets/square.png');
+}
+
+function create ()
+{
+    //Set world bounds
+    this.matter.world.setBounds();
+
+    //  A simple background for our game
+    this.add.image(400, 300, 'sky');
+
+    //  Here we create the ground.
+    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    this.matter.add.image(400, 568, 'ground', null, { isStatic: true }).setScale(2);
+
+    //  Now let's create some ledges
+    this.matter.add.image(600, 400, 'ground', null, { isStatic: true });
+    this.matter.add.image(50, 250, 'ground', null, { isStatic: true });
+    this.matter.add.image(750, 220, 'ground', null, { isStatic: true });
+
+    // The player and its settings
+    player = this.matter.add.sprite(100, 450, 'square');
+    player.setBody({
+        type: 'rectangle'
+        ,width: 32
+        ,height: 32
+    });
+    player.setBounce(0.1);
+
+    /*
+    //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
+    stars = this.matter.add.group({
+        key: 'star',
+        repeat: 11,
+        setXY: { x: 12, y: 0, stepX: 70 }
+    });
+
+    stars.children.iterate(function (child) {
+
+        //  Give each star a slightly different bounce
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+    });
+    */
+
+    //  The score
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
+    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
+    //this.physics.add.overlap(player, stars, collectStar, null, this);
+
+    // Set up input
+    this.input.on("pointerdown", function (pointer) {
+        if(pointer.id === 0)
+        {
+            pressX = pointer.x;
+            pressY = pointer.y;
+        }
+    }, this);
+
+    this.input.on("pointerup", function (pointer) {
+        if(pointer.id === 0)
+        {
+            var dirX = pointer.x - pressX;
+            var dirY = pointer.y - pressY;
+            var veloScale = 0.1;
+
+            player.setVelocity(dirX * veloScale, dirY * veloScale);
+
+            var angleDeg = 0;
+            //Trig version
+            //var angleDeg = Math.cos(Math.atan2(dirY, dirX)) * 180 / Math.PI;
+            //angleDeg *= 10;
+
+            //3d version
+            var lengthSquared = dirX * dirX + dirY * dirY;
+            if(lengthSquared > 0)
+            {
+                var length = Math.sqrt(lengthSquared);
+
+                dirX /= length;
+                //angleDeg = dirX * 0.1;
+                if(dirX < 0)
+                {
+                    angleDeg = -0.12;
+                }
+                else
+                {
+                    angleDeg = 0.12;
+                }
+            }
+
+            player.setAngularVelocity(angleDeg);
+        }
+    }, this);
+}
+
+function update ()
+{
+    if (gameOver)
+    {
+
+    }
+
+    //player.setVelocityX(0);
+    //player.anims.play('turn');
+}
+
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+
+    //  Add and update the score
+    score += 10;
+    scoreText.setText('Score: ' + score);
+
+    if (stars.countActive(true) === 0)
+    {
+        //  A new batch of stars to collect
+        stars.children.iterate(function (child) {
+
+            child.enableBody(true, child.x, 0, true, true);
+
+        });
+    }
+}
+
+</script>
+
+</body>
+</html>
