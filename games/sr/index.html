@@ -16,8 +16,8 @@
 
 var config = {
     type: Phaser.AUTO,
-    width: window.innerWidth * window.devicePixelRatio,
-    height: window.innerHeight * window.devicePixelRatio,
+    width: window.innerWidth,
+    height: window.innerHeight,
     physics: {
         default: 'matter',
         matter: {
@@ -58,7 +58,6 @@ function preload ()
 
 function create ()
 {
-    var scaleRatio = window.devicePixelRatio;
     var canvasW = game.canvas.width;
     var canvasH = game.canvas.height;
     var worldCenterX = canvasW / 2;
@@ -68,23 +67,20 @@ function create ()
     this.matter.world.setBounds();
 
     //  A simple background for our game
-    this.add.image(worldCenterX, worldCenterY, 'sky').setScale(scaleRatio);
+    this.add.image(worldCenterX, worldCenterY, 'sky');
 
     //  Here we create the ground.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    var plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(scaleRatio * 2);
+    var plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(2);
     plat.setPosition(worldCenterX, canvasH - plat.displayHeight / 2);
 
     //  Now let's create some ledges
-    plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(scaleRatio);
-    plat.setPosition(canvasW - plat.displayWidth / 2 - 100, canvasH - 250);
-    plat = this.matter.add.image(50, 250, 'ground', null, { isStatic: true }).setScale(scaleRatio);
-    plat.setPosition(plat.displayWidth / 2, canvasH - 375);
-    plat = this.matter.add.image(750, 220, 'ground', null, { isStatic: true }).setScale(scaleRatio);
-    plat.setPosition(canvasW - plat.displayWidth / 2, canvasH - 425);
+    plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true });
+    plat.setScale(0.5, 1);
+    plat.setPosition(worldCenterX, worldCenterY);
 
     // The player and its settings
-    player = this.matter.add.sprite(worldCenterX, worldCenterY, 'square').setScale(scaleRatio);
+    player = this.matter.add.sprite(worldCenterX, worldCenterY, 'square');
     player.setBody({
         type: 'rectangle'
         ,width: 32
