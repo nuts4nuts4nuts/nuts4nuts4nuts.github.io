@@ -19,9 +19,10 @@ var referenceWidth = 800;
 var referenceHeight = 600;
 
 //Real screen dimensions are window.innerWidth * DPR, window.innerHeight * DPR
+//Is DPR a myth?!?!?!?!?
 
-var realRefRatioX = window.innerWidth * window.devicePixelRatio / referenceWidth;
-var realRefRatioY = window.innerHeight * window.devicePixelRatio / referenceHeight;
+var realRefRatioX = window.innerWidth / referenceWidth;
+var realRefRatioY = window.innerHeight / referenceHeight;
 
 var scaleFactor = Math.min(realRefRatioX, realRefRatioY);
 
@@ -36,8 +37,8 @@ var finalSafeY = finalHeight * 0.1;
 
 var config = {
     type: Phaser.AUTO,
-    width: finalWidth / window.devicePixelRatio,
-    height: finalHeight / window.devicePixelRatio,
+    width: finalWidth,
+    height: finalHeight,
     physics: {
         default: 'matter',
         matter: {
