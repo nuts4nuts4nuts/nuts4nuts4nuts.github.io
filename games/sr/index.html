@@ -15,8 +15,8 @@
 <script type="text/javascript">
 
 //Device scaling stuff
-var referenceWidth = 800;
-var referenceHeight = 600;
+var referenceWidth = 1080;
+var referenceHeight = 1920;
 
 //Real screen dimensions are window.innerWidth * DPR, window.innerHeight * DPR
 //Is DPR a myth?!?!?!?!?
@@ -103,7 +103,7 @@ function create ()
     plat.setPosition(worldCenterX, worldCenterY);
 
     // The player and its settings
-    player = this.matter.add.sprite(0, 0, 'square').setScale(scaleFactor);
+    player = this.matter.add.sprite(0, 0, 'square').setScale(3 * scaleFactor);
     player.setPosition(worldCenterX, worldCenterY);
     player.setBounce(0.01);
     player.setFrictionAir(0.001);
