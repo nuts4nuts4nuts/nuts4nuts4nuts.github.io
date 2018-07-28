@@ -14,10 +14,30 @@
 
 <script type="text/javascript">
 
+//Device scaling stuff
+var referenceWidth = 800;
+var referenceHeight = 600;
+
+//Real screen dimensions are window.innerWidth * DPR, window.innerHeight * DPR
+
+var realRefRatioX = window.innerWidth * window.devicePixelRatio / referenceWidth;
+var realRefRatioY = window.innerHeight * window.devicePixelRatio / referenceHeight;
+
+var scaleFactor = Math.min(realRefRatioX, realRefRatioY);
+
+var finalWidth = referenceWidth * scaleFactor;
+var finalHeight = referenceHeight * scaleFactor;
+
+var finalSafeWidth = finalWidth * 0.90;
+var finalSafeHeight = finalHeight * 0.90;
+
+var finalSafeX = finalWidth * 0.1;
+var finalSafeY = finalHeight * 0.1;
+
 var config = {
     type: Phaser.AUTO,
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: finalWidth / window.devicePixelRatio,
+    height: finalHeight / window.devicePixelRatio,
     physics: {
         default: 'matter',
         matter: {
@@ -34,7 +54,6 @@ var config = {
 
 var player;
 var stars;
-var platforms;
 
 //These are done as separate numbers to get around JS passing conventions. TODO: Figure this out better
 var pressX;
@@ -58,34 +77,33 @@ function preload ()
 
 function create ()
 {
-    var canvasW = game.canvas.width;
-    var canvasH = game.canvas.height;
-    var worldCenterX = canvasW / 2;
-    var worldCenterY = canvasH / 2;
+    var canvasW = finalSafeWidth;
+    var canvasH = finalSafeHeight;
+
+    var canvasX = finalSafeX;
+    var canvasY = finalSafeY;
+    var worldCenterX = (canvasX + canvasW) / 2;
+    var worldCenterY = (canvasY + canvasH) / 2;
 
     //Set world bounds
     this.matter.world.setBounds();
 
     //  A simple background for our game
-    this.add.image(worldCenterX, worldCenterY, 'sky');
+    this.add.image(worldCenterX, worldCenterY, 'sky').setScale(scaleFactor);
 
     //  Here we create the ground.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    var plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(2);
+    var plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(2 * scaleFactor);
     plat.setPosition(worldCenterX, canvasH - plat.displayHeight / 2);
 
     //  Now let's create some ledges
     plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true });
-    plat.setScale(0.5, 1);
+    plat.setScale(scaleFactor);
     plat.setPosition(worldCenterX, worldCenterY);
 
     // The player and its settings
-    player = this.matter.add.sprite(worldCenterX, worldCenterY, 'square');
-    player.setBody({
-        type: 'rectangle'
-        ,width: 32
-        ,height: 32
-    });
+    player = this.matter.add.sprite(0, 0, 'square').setScale(scaleFactor);
+    player.setPosition(worldCenterX, worldCenterY);
     player.setBounce(0.01);
     player.setFrictionAir(0.001);
 
@@ -125,7 +143,7 @@ function create ()
         {
             var dirX = pointer.x - pressX;
             var dirY = pointer.y - pressY;
-            var veloScale = 0.1;
+            var veloScale = 0.09;
 
             player.setVelocity(dirX * veloScale, dirY * veloScale);
 
