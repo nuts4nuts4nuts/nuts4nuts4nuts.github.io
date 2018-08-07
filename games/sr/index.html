@@ -149,6 +149,7 @@ function create ()
 
     // Set up input
     this.input.on("pointerdown", function (pointer) {
+        console.log(pointer.id);
         if(pointer.id === 0)
         {
             pressX = pointer.x;
