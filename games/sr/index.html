@@ -1,9 +1,9 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8" />
     <title>Shape Rogue - The Game of the Century</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.1.1/dist/phaser.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -42,8 +42,10 @@ var config = {
     physics: {
         default: 'matter',
         matter: {
-            gravity: { y: 0.8 },
-            debug: true
+            gravity: {
+               y: 0.4
+            }
+            ,debug: false
         }
     },
     scene: {
@@ -68,12 +70,25 @@ var scoreText;
 
 var game = new Phaser.Game(config);
 
+var shapeData = {
+        colorMap: []
+        ,movementThreshold: 0.2778
+        ,rotationThreshold: 0.001
+        ,stationaryTime: 0
+        ,stationaryTimeThreshold: 4
+        ,isStationary: true
+        ,lastColor: ""
+    };
+
 function preload ()
 {
     this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
+    this.load.image('ground', 'assets/floor.png');
+    this.load.image('platform', 'assets/platform.png');
     this.load.image('square', 'assets/square.png');
+
+    this.load.json('physics', 'assets/physics.json');
+    this.load.json('anglemap', 'assets/anglemap.json');
 }
 
 function create ()
@@ -90,23 +105,28 @@ function create ()
     this.matter.world.setBounds();
 
     //  A simple background for our game
-    this.add.image(worldCenterX, worldCenterY, 'sky').setScale(scaleFactor);
+    this.add.image(worldCenterX, worldCenterY, 'sky').setScale(5 * scaleFactor);
+
+    //PHYSICS OBJECTS
+
+    //Import JSON
+    var shapes  = this.cache.json.get('physics');
+    var angles  = this.cache.json.get('anglemap');
 
     //  Here we create the ground.
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    var plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true }).setScale(2 * scaleFactor);
+    var plat = this.matter.add.image(0, 0, 'ground', null, {shape: shapes.floor}).setScale(scaleFactor);
     plat.setPosition(worldCenterX, canvasH - plat.displayHeight / 2);
 
     //  Now let's create some ledges
-    plat = this.matter.add.image(0, 0, 'ground', null, { isStatic: true });
-    plat.setScale(scaleFactor);
+    plat = this.matter.add.image(0, 0, 'platform', null, {shape: shapes.platform}).setScale(scaleFactor);
     plat.setPosition(worldCenterX, worldCenterY);
 
     // The player and its settings
-    player = this.matter.add.sprite(0, 0, 'square').setScale(3 * scaleFactor);
+    player = this.matter.add.sprite(0, 0, 'square', null, {shape: shapes.square}).setScale(scaleFactor);
     player.setPosition(worldCenterX, worldCenterY);
-    player.setBounce(0.01);
-    player.setFrictionAir(0.001);
+
+    shapeData.colorMap = angles.square;
 
     /*
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
@@ -125,10 +145,7 @@ function create ()
     */
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-
-    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    //this.physics.add.overlap(player, stars, collectStar, null, this);
+    scoreText = this.add.text(16, 16, 'Combo: 0', { fontSize: '32px', fill: '#000' });
 
     // Set up input
     this.input.on("pointerdown", function (pointer) {
@@ -140,46 +157,107 @@ function create ()
     }, this);
 
     this.input.on("pointerup", function (pointer) {
-        if(pointer.id === 0)
+        if(pointer.id === 0 && shapeData.isStationary)
         {
             var dirX = pointer.x - pressX;
             var dirY = pointer.y - pressY;
             var veloScale = 0.09;
 
-            player.setVelocity(dirX * veloScale, dirY * veloScale);
-
-            var angleDeg = 0;
-            //Trig version
-            //var angleDeg = Math.cos(Math.atan2(dirY, dirX)) * 180 / Math.PI;
-            //angleDeg *= 10;
-
-            //3d version
-            var lengthSquared = dirX * dirX + dirY * dirY;
-            if(lengthSquared > 0)
-            {
-                var length = Math.sqrt(lengthSquared);
-
-                dirX /= length;
-                //angleDeg = dirX * 0.1;
-                if(dirX < 0)
-                {
-                    angleDeg = -0.08;
-                }
-                else
-                {
-                    angleDeg = 0.08;
-                }
-            }
-
-            player.setAngularVelocity(angleDeg);
+            flingObject(dirX, dirY, veloScale, player);
         }
     }, this);
+
 }
 
-function update ()
+function isObjectStill(object, speedThreshold, rotationThreshold)
 {
-    if (gameOver)
+    return object.body.speed < speedThreshold && object.body.angularSpeed < rotationThreshold;
+}
+
+function flingObject(dirX, dirY, velocityScale, object)
+{
+    object.setVelocity(dirX * velocityScale, dirY * velocityScale);
+
+    var angleDeg = 0;
+    //Trig version
+    //var angleDeg = Math.cos(Math.atan2(dirY, dirX)) * 180 / Math.PI;
+    //angleDeg *= 10;
+
+    //3d version
+    var lengthSquared = dirX * dirX + dirY * dirY;
+    let epsilon = 0.1;
+    if(lengthSquared > epsilon)
     {
+        var length = Math.sqrt(lengthSquared);
+
+        dirX /= length;
+        //angleDeg = dirX * 0.1;
+        if(dirX < 0)
+        {
+            angleDeg = -0.1;
+        }
+        else
+        {
+            angleDeg = 0.1;
+        }
+
+        object.setAngularVelocity(angleDeg);
+        shapeData.isStationary = false;
+        shapeData.stationaryTime = 0;
+    }
+}
+
+function update (delta)
+{
+    if(!shapeData.isStationary)
+    {
+        if(isObjectStill(player, shapeData.movementThreshold, shapeData.rotationThreshold))
+        {
+            shapeData.stationaryTime += delta;
+        }
+
+        if(shapeData.stationaryTime > shapeData.stationaryTimeThreshold)
+        {
+            shapeData.isStationary = true;
+
+            let adjustedAngle = player.angle + 180;
+
+            for(var i of shapeData.colorMap)
+            {
+                if(i.start > i.end)
+                {
+                    if((i.start < adjustedAngle && adjustedAngle < (i.end + 360)) ||
+                      ((i.start - 360) < adjustedAngle && adjustedAngle < i.end))
+                    {
+                        if(i.color == shapeData.lastColor)
+                        {
+                            score += 1;
+                        }
+                        else
+                        {
+                            score = 0;
+                        }
+
+                        scoreText.setText('Combo: ' + score);
+                        shapeData.lastColor = i.color;
+                    }
+                }
+                else if(i.start < adjustedAngle && adjustedAngle < i.end)
+                {
+                    if(i.color == shapeData.lastColor)
+                    {
+                        score += 1;
+                    }
+                    else
+                    {
+                        score = 0;
+                    }
+
+                    scoreText.setText('Combo: ' + score);
+                    shapeData.lastColor = i.color;
+                }
+            }
+        }
 
     }
 

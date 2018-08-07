@@ -1,0 +1,24 @@
+{
+	"square": [
+		{
+            "start": 315,
+            "end": 45,
+            "color": "blue"
+        },
+        {
+            "start": 45,
+            "end": 135,
+            "color": "yellow"
+        },
+        {
+            "start": 135,
+            "end": 225,
+            "color": "red"
+        },
+        {
+            "start": 225,
+            "end": 315,
+            "color": "green"
+        }
+	]
+}
