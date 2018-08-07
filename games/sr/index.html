@@ -150,6 +150,7 @@ function create ()
     // Set up input
     this.input.on("pointerdown", function (pointer) {
         console.log(pointer.id);
+        console.warn(pointer.id);
         pressX = pointer.x;
         pressY = pointer.y;
     }, this);
