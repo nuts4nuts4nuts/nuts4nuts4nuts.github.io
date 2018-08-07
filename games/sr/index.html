@@ -149,16 +149,12 @@ function create ()
 
     // Set up input
     this.input.on("pointerdown", function (pointer) {
-        console.log(pointer.id);
-        if(pointer.id === 0)
-        {
-            pressX = pointer.x;
-            pressY = pointer.y;
-        }
+        pressX = pointer.x;
+        pressY = pointer.y;
     }, this);
 
     this.input.on("pointerup", function (pointer) {
-        if(pointer.id === 0 && shapeData.isStationary)
+        if(shapeData.isStationary)
         {
             var dirX = pointer.x - pressX;
             var dirY = pointer.y - pressY;
