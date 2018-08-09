@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Simple Timer</title>
+    <title>Thai Myrrh</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
@@ -108,11 +108,6 @@ function update ()
 {
     let remaining = timer.getRemainingTime();
 
-    if(timer.pauseTime > 0)
-    {
-        remaining = timer.duration - (timer.pauseTime - timer.startTime);
-    }
-
     //Ceiling so that 00;00 really is 0 and not 0 + some fractional part
     let prettySeconds = Math.ceil(remaining / 1000);
 
@@ -137,9 +132,15 @@ function update ()
         return str;
     }
 
-    let timeString = timeFormat(hours) + ':' + timeFormat(minutes) + ':' + timeFormat(seconds);
-    timer.timeText.setText(timeString);
+    let secondString = timeFormat(seconds);
+    let minuteString = ':' + timeFormat(minutes) + ':';
+    let hourString = timeFormat(hours);
 
+    timer.secondText.setText(secondString);
+    timer.minuteText.setText(minuteString);
+    timer.hourText.setText(hourString);
+
+    let timeString = hourString + minuteString + secondString;
     if (minutes < 1) {
         timeString = timeString.substr(6, 2);
     }
@@ -147,24 +148,33 @@ function update ()
         timeString = timeString.substr(3, 5);
     }
 
-    let titleString = "TM - " + timeString;
-
-    if (timer.pauseTime > 0)
+    if(timer.isStarted())
     {
-        titleString += " [Paused]";
+        let titleString = "TM - " + timeString;
+
+        if (timer.pauseTime > 0)
+        {
+            titleString += " [Paused]";
+        }
+        else if(gameHidden)
+        {
+            titleString += " [Hidden]"
+        }
+
+        window.document.title = titleString;
     }
-    else if(gameHidden)
+    else
     {
-        titleString += " [Hidden]"
+        window.document.title = "Thai Myrrh";
     }
 
-    window.document.title = titleString;
+    Phaser.Actions.SetTint(timer.group.getChildren(), 0x0000ff);
 }
 
-function createTimer(posX, posY, scaleFactor, color, context)
+function createTimer(centerX, centerY, scaleFactor, color, context)
 {
     var timer = {
-        duration: 600000
+        duration: 1500000
         ,startTime: 0
         ,pauseTime: 0
         ,isPaused: function () {
@@ -181,47 +191,118 @@ function createTimer(posX, posY, scaleFactor, color, context)
                 this.pauseTime = 0;
             }
         }
-        ,isStarted: function () {
-            return this.pauseTime > this.startTime;
-        }
         ,getRemainingTime: function () {
-            return Math.max(this.duration - (Date.now() - this.startTime), 0);
+            let time;
+            if(this.isPaused())
+            {
+                time = this.duration - (this.pauseTime - this.startTime);
+            }
+            else
+            {
+                time = this.duration - (Date.now() - this.startTime);
+            }
+
+            return Math.max(time, 0);
+        }
+        ,isStarted: function () {
+            return this.getRemainingTime() < this.duration;
         }
 
         /*
         bg
         ,center
-        ,timeText
+        ,hourText
+        ,minuteText
+        ,secondText
         ,resetText
         ,editText
+        ,group
         */
     };
-    //timer.duration = 10000;
-    timer.startTime = Date.now();
 
-    timer.bg = context.add.sprite(posX, posY, 'timerBG').setScale(scaleFactor);
+    timer.group = context.add.group();
+
+    timer.startTime = Date.now();
+    timer.pauseTime = timer.startTime;
+
+    timer.bg = timer.group.create(centerX, centerY, 'timerBG').setScale(scaleFactor);
     timer.bg.setTint(color);
 
-    timer.center = context.add.sprite(posX, posY, 'timerCenter').setScale(scaleFactor).setInteractive();
+    timer.center = timer.group.create(centerX, centerY, 'timerCenter').setScale(scaleFactor).setInteractive();
     timer.center.setTint(color);
     timer.center.on('pointerdown', function (pointer) {
         timer.pauseToggle();
     });
 
-    timer.timeText = context.add.text(posX, posY, '00:00:00', {fontFamily: 'Arial', fontSize: 32});
-    timer.timeText.setPosition(timer.timeText.x - timer.timeText.width / 2, timer.timeText.y - timer.timeText.height / 2);
-    timer.timeText.setTint(color);
+    let fontSizeTime = Math.floor(64 * scaleFactor);
+    let fontSizeText = Math.floor(32 * scaleFactor);
+    timer.minuteText = context.add.text(centerX, centerY, ':00:', {fontFamily: 'Arial', fontSize: fontSizeTime});
+    timer.minuteText.setPosition(timer.minuteText.x - timer.minuteText.displayWidth / 2, timer.minuteText.y - timer.minuteText.displayHeight / 2);
+    timer.minuteText.setTint(color);
+    timer.group.add(timer.minuteText);
 
-    let timerEdgeBuffer = timer.bg.width / 30;
-    let timerEdgeSafeWidth = posX + timer.bg.width / 2 - timerEdgeBuffer;
-    let timerEdgeSafeHeight = posY + timer.bg.height / 2 - timerEdgeBuffer;
+    timer.hourText = context.add.text(centerX, centerY, '00', {fontFamily: 'Arial', fontSize: fontSizeTime});
+    timer.hourText.setPosition(timer.hourText.x - timer.hourText.displayWidth - timer.minuteText.displayWidth / 2, timer.hourText.y - timer.hourText.displayHeight / 2);
+    timer.hourText.setTint(color);
+    timer.group.add(timer.hourText);
 
-    timer.resetText = context.add.text(timerEdgeSafeWidth, timerEdgeSafeHeight, 'reset', {fontFamily: 'Arial', fontSize: 24}).setInteractive();
-    timer.resetText.setPosition(timer.resetText.x - timer.resetText.width, timer.resetText.y - timer.resetText.height);
+    timer.secondText = context.add.text(centerX, centerY, '00', {fontFamily: 'Arial', fontSize: fontSizeTime});
+    timer.secondText.setPosition(timer.secondText.x + timer.minuteText.displayWidth / 2, timer.secondText.y - timer.secondText.displayHeight / 2);
+    timer.secondText.setTint(color);
+    timer.group.add(timer.secondText);
+
+    //
+    let timerEdgeBuffer = timer.bg.displayWidth / 30;
+    let timerEdgeSafeWidth = centerX + timer.bg.displayWidth/ 2 - timerEdgeBuffer;
+    let timerEdgeSafeHeight = centerY + timer.bg.displayHeight / 2 - timerEdgeBuffer;
+
+    timer.resetText = context.add.text(timerEdgeSafeWidth, timerEdgeSafeHeight, 'reset', {fontFamily: 'Arial', fontSize: fontSizeText}).setInteractive();
+    timer.resetText.setPosition(timer.resetText.x - timer.resetText.displayWidth, timer.resetText.y - timer.resetText.displayHeight);
     timer.resetText.setTint(color);
+    timer.group.add(timer.resetText);
     timer.resetText.on('pointerdown', function () {
         timer.startTime = Date.now();
         timer.pauseTime = timer.startTime;
+    });
+
+    timer.editText = context.add.text(centerX - (timer.bg.displayWidth / 2 - timerEdgeBuffer), timerEdgeSafeHeight, 'edit', {fontFamily: 'Arial', fontSize: fontSizeText}).setInteractive();
+    timer.editText.setPosition(timer.editText.x, timer.editText.y - timer.editText.displayHeight);
+    timer.editText.setTint(color);
+    timer.group.add(timer.editText);
+    timer.editText.on('pointerdown', function () {
+        //Start edit mode
+        let secondX = timer.secondText.x;
+        let secondY = timer.secondText.y;
+
+        let minuteX = timer.minuteText.x;
+        let minuteY = timer.minuteText.y;
+
+        let hourX = timer.hourText.x;
+        let hourY = timer.hourText.y;
+
+        context.tweens.add({
+            targets: timer.secondText
+            ,x: centerX * 5 / 3 - timer.secondText.displayWidth / 2
+            ,y: centerY - timer.secondText.displayHeight / 2
+            ,duration: 500
+            ,ease: "Cubic.easeOut"
+        });
+
+        context.tweens.add({
+            targets: timer.minuteText
+            ,x: centerX - timer.minuteText.displayWidth / 2
+            ,y: centerY - timer.minuteText.displayHeight / 2
+            ,duration: 500
+            ,ease: "Cubic.easeOut"
+        });
+
+        context.tweens.add({
+            targets: timer.hourText
+            ,x: centerX / 3 - timer.hourText.displayWidth / 2
+            ,y: centerY - timer.hourText.displayHeight / 2
+            ,duration: 500
+            ,ease: "Cubic.easeOut"
+        });
     });
 
     game.events.on('hidden', function(){
